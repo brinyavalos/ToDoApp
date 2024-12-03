@@ -12,11 +12,11 @@
 **Functional**
   - Add Task: Allows the user to create new tasks.
   - Set Due Date: Lets the user assign a deadline to the task.
-    * Edit Task: The user can edit an existing task.
-      + Receive Reminder: The user gets reminders about upcoming deadlines.
-        - Mark Complete: The user can mark tasks as done.
-          *  Set Priority: Users can assign priority levels (e.g., high, medium, low) to tasks.
-      - View To-Do List: Allows the user to view their current tasks.
+  - Edit Task: The user can edit an existing task.
+  - Receive Reminder: The user gets reminders about upcoming deadlines.
+  - Mark Complete: The user can mark tasks as done.
+  - Set Priority: Users can assign priority levels (e.g., high, medium, low) to tasks.
+  -  View To-Do List: Allows the user to view their current tasks.
 **Nonfunctional**
       - Easy to Use: The app should be simple and quick to learn.
       - Fast: The app should load quickly and respond smoothly.
