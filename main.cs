@@ -13,7 +13,7 @@ class Task
 
     public override string ToString()
     {
-        return $"ID: {Id} | Title: {Title} | Priority: {Priority} | Deadline: {Deadline.ToString("MM/dd/yyyy")} | Completed: {IsCompleted}";
+        return $"ID: {Id} | Title: {Title} | Priority: {Priority} | Deadline: {Deadline:MM/dd/yyyy} | Completed: {IsCompleted}";
     }
 }
 
@@ -29,10 +29,13 @@ class ToDoListApp
             Console.Clear();
             Console.WriteLine("=== To-Do List App ===");
             Console.WriteLine("1. Add Task");
-            Console.WriteLine("2. View Tasks");
-            Console.WriteLine("3. Mark Task as Complete");
-            Console.WriteLine("4. Delete Task");
-            Console.WriteLine("5. Exit");
+            Console.WriteLine("2. Set Due Date");
+            Console.WriteLine("3. Edit Task");
+            Console.WriteLine("4. Receive Reminders");
+            Console.WriteLine("5. Mark Task Complete");
+            Console.WriteLine("6. Set Task Priority");
+            Console.WriteLine("7. View To-Do List");
+            Console.WriteLine("8. Exit");
             Console.Write("Choose an option: ");
 
             string choice = Console.ReadLine();
@@ -43,15 +46,24 @@ class ToDoListApp
                     AddTask();
                     break;
                 case "2":
-                    ViewTasks();
+                    SetDueDate();
                     break;
                 case "3":
-                    MarkTaskComplete();
+                    EditTask();
                     break;
                 case "4":
-                    DeleteTask();
+                    ReceiveReminders();
                     break;
                 case "5":
+                    MarkTaskComplete();
+                    break;
+                case "6":
+                    SetTaskPriority();
+                    break;
+                case "7":
+                    ViewTasks();
+                    break;
+                case "8":
                     Console.WriteLine("Goodbye!");
                     return;
                 default:
@@ -80,15 +92,7 @@ class ToDoListApp
         }
 
         Console.Write("Priority (Low, Medium, High): ");
-        string priority;
-        while (true)
-        {
-            priority = Console.ReadLine();
-            if (priority == "Low" || priority == "Medium" || priority == "High")
-                break;
-
-            Console.Write("Invalid priority. Enter Low, Medium, or High: ");
-        }
+        string priority = GetValidPriority();
 
         tasks.Add(new Task
         {
@@ -104,24 +108,65 @@ class ToDoListApp
         Console.ReadLine();
     }
 
-    private void ViewTasks()
+    private void SetDueDate()
     {
         Console.Clear();
-        Console.WriteLine("=== View Tasks ===");
+        Console.WriteLine("=== Set Due Date ===");
+        ViewTasks();
 
-        if (!tasks.Any())
+        Console.Write("Enter Task ID to set due date: ");
+        Task task = GetTaskById();
+
+        Console.Write("New Deadline (MM/DD/YYYY): ");
+        DateTime newDeadline;
+        while (!DateTime.TryParseExact(Console.ReadLine(), "MM/dd/yyyy", null, System.Globalization.DateTimeStyles.None, out newDeadline))
         {
-            Console.WriteLine("No tasks available.");
+            Console.Write("Invalid date format. Try again (MM/DD/YYYY): ");
+        }
+
+        task.Deadline = newDeadline;
+        Console.WriteLine("Deadline updated successfully! Press Enter to continue.");
+        Console.ReadLine();
+    }
+
+    private void EditTask()
+    {
+        Console.Clear();
+        Console.WriteLine("=== Edit Task ===");
+        ViewTasks();
+
+        Console.Write("Enter Task ID to edit: ");
+        Task task = GetTaskById();
+
+        Console.Write("New Title: ");
+        task.Title = Console.ReadLine();
+
+        Console.Write("New Description: ");
+        task.Description = Console.ReadLine();
+
+        Console.WriteLine("Task updated successfully! Press Enter to continue.");
+        Console.ReadLine();
+    }
+
+    private void ReceiveReminders()
+    {
+        Console.Clear();
+        Console.WriteLine("=== Upcoming Deadlines ===");
+
+        var upcomingTasks = tasks.Where(t => !t.IsCompleted && t.Deadline <= DateTime.Now.AddDays(1));
+        if (!upcomingTasks.Any())
+        {
+            Console.WriteLine("No tasks with upcoming deadlines.");
         }
         else
         {
-            foreach (var task in tasks)
+            foreach (var task in upcomingTasks)
             {
                 Console.WriteLine(task);
             }
         }
 
-        Console.WriteLine("Press Enter to go back.");
+        Console.WriteLine("Press Enter to continue.");
         Console.ReadLine();
     }
 
@@ -129,57 +174,79 @@ class ToDoListApp
     {
         Console.Clear();
         Console.WriteLine("=== Mark Task as Complete ===");
-
-        if (!tasks.Any())
-        {
-            Console.WriteLine("No tasks available.");
-            Console.WriteLine("Press Enter to go back.");
-            Console.ReadLine();
-            return;
-        }
-
         ViewTasks();
+
         Console.Write("Enter Task ID to mark as complete: ");
-        int taskId;
+        Task task = GetTaskById();
 
-        while (!int.TryParse(Console.ReadLine(), out taskId) || !tasks.Any(t => t.Id == taskId))
-        {
-            Console.Write("Invalid ID. Try again: ");
-        }
-
-        Task task = tasks.First(t => t.Id == taskId);
         task.IsCompleted = true;
-
         Console.WriteLine("Task marked as complete! Press Enter to continue.");
         Console.ReadLine();
     }
 
-    private void DeleteTask()
+    private void SetTaskPriority()
     {
         Console.Clear();
-        Console.WriteLine("=== Delete Task ===");
+        Console.WriteLine("=== Set Task Priority ===");
+        ViewTasks();
+
+        Console.Write("Enter Task ID to set priority: ");
+        Task task = GetTaskById();
+
+        Console.Write("New Priority (Low, Medium, High): ");
+        task.Priority = GetValidPriority();
+
+        Console.WriteLine("Priority updated successfully! Press Enter to continue.");
+        Console.ReadLine();
+    }
+
+    private void ViewTasks()
+    {
+        Console.Clear();
+        Console.WriteLine("=== View To-Do List ===");
 
         if (!tasks.Any())
         {
             Console.WriteLine("No tasks available.");
-            Console.WriteLine("Press Enter to go back.");
-            Console.ReadLine();
-            return;
+        }
+        else
+        {
+            Console.WriteLine("Current Tasks:");
+            for (int i = 0; i < tasks.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {tasks[i]}");
+            }
         }
 
-        ViewTasks();
-        Console.Write("Enter Task ID to delete: ");
-        int taskId;
+        Console.WriteLine();
+        Console.WriteLine("Press Enter to continue.");
+        Console.ReadLine();
+    }
 
+    private Task GetTaskById()
+    {
+        int taskId;
         while (!int.TryParse(Console.ReadLine(), out taskId) || !tasks.Any(t => t.Id == taskId))
         {
             Console.Write("Invalid ID. Try again: ");
         }
 
-        tasks.RemoveAll(t => t.Id == taskId);
+        return tasks.First(t => t.Id == taskId);
+    }
 
-        Console.WriteLine("Task deleted successfully! Press Enter to continue.");
-        Console.ReadLine();
+    private string GetValidPriority()
+    {
+        string priority;
+        while (true)
+        {
+            priority = Console.ReadLine();
+            if (priority == "Low" || priority == "Medium" || priority == "High")
+                break;
+
+            Console.Write("Invalid priority. Enter Low, Medium, or High: ");
+        }
+
+        return priority;
     }
 }
 
