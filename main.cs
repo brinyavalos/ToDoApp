@@ -13,7 +13,7 @@ class Task
 
     public override string ToString()
     {
-        return $"ID: {Id} | Title: {Title} | Priority: {Priority} | Deadline: {Deadline} | Completed: {IsCompleted}";
+        return $"ID: {Id} | Title: {Title} | Priority: {Priority} | Deadline: {Deadline.ToString("MM/dd/yyyy")} | Completed: {IsCompleted}";
     }
 }
 
@@ -72,11 +72,11 @@ class ToDoListApp
         Console.Write("Description: ");
         string description = Console.ReadLine();
 
-        Console.Write("Deadline (YYYY-MM-DD): ");
+        Console.Write("Deadline (MM/DD/YYYY): ");
         DateTime deadline;
-        while (!DateTime.TryParse(Console.ReadLine(), out deadline))
+        while (!DateTime.TryParseExact(Console.ReadLine(), "MM/dd/yyyy", null, System.Globalization.DateTimeStyles.None, out deadline))
         {
-            Console.Write("Invalid date. Try again (YYYY-MM-DD): ");
+            Console.Write("Invalid date format. Try again (MM/DD/YYYY): ");
         }
 
         Console.Write("Priority (Low, Medium, High): ");
