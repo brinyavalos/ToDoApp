@@ -24,7 +24,7 @@
 
 **Nonfunctional**
   - Easy to Use: The app should be simple and quick to learn.
-  - - Fast: The app should load quickly and respond smoothly.
-    -  Works Everywhere: It should work on iOS, Android, and web browsers.
-    -  - Reliable: It shouldn’t crash or lose user data.
-       - - Secure: User info should be protected.
+  - Fast: The app should load quickly and respond smoothly.
+  - Works Everywhere: It should work on iOS, Android, and web browsers.
+  - Reliable: It shouldn’t crash or lose user data.
+  - Secure: User info should be protected.
