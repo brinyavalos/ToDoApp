@@ -8,12 +8,12 @@ class Task
     public string Title { get; set; }
     public string Description { get; set; }
     public DateTime Deadline { get; set; }
-    public string Priority { get; set; } 
+    public string Priority { get; set; }
     public bool IsCompleted { get; set; }
 
     public override string ToString()
     {
-        return $"ID: {Id} | Title: {Title} | Priority: {Priority} | Deadline: {Deadline:MM/dd/yyyy} | Completed: {IsCompleted}";
+        return $"Task ID: {Id} \n\tTask Name: {Title} \n\tTask Priority: {Priority} \n\tTask Deadline: {Deadline:MM/dd/yyyy} \n\tIs Task Completed ?: {IsCompleted}";
     }
 }
 
@@ -27,13 +27,13 @@ class ToDoListApp
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("=== To-Do List App ===");
+            Console.WriteLine("「 To-Do List App 」\n");
             Console.WriteLine("1. Add Task");
-            Console.WriteLine("2. Set Due Date");
+            Console.WriteLine("2. Change Due Date");
             Console.WriteLine("3. Edit Task");
             Console.WriteLine("4. Receive Reminders");
-            Console.WriteLine("5. Mark Task Complete");
-            Console.WriteLine("6. Set Task Priority");
+            Console.WriteLine("5. Mark Task as Complete");
+            Console.WriteLine("6. Change Task Priority");
             Console.WriteLine("7. View To-Do List");
             Console.WriteLine("8. Exit");
             Console.Write("Choose an option: ");
@@ -77,8 +77,8 @@ class ToDoListApp
     private void AddTask()
     {
         Console.Clear();
-        Console.WriteLine("=== Add Task ===");
-        Console.Write("Title: ");
+        Console.WriteLine("「 Add Task 」");
+        Console.Write("Task Name: ");
         string title = Console.ReadLine();
 
         Console.Write("Description: ");
@@ -111,7 +111,7 @@ class ToDoListApp
     private void SetDueDate()
     {
         Console.Clear();
-        Console.WriteLine("=== Set Due Date ===");
+        Console.WriteLine("「 Change Due Date 」");
         ViewTasks();
 
         Console.Write("Enter Task ID to set due date: ");
@@ -132,7 +132,7 @@ class ToDoListApp
     private void EditTask()
     {
         Console.Clear();
-        Console.WriteLine("=== Edit Task ===");
+        Console.WriteLine("「 Edit Task 」");
         ViewTasks();
 
         Console.Write("Enter Task ID to edit: ");
@@ -151,7 +151,7 @@ class ToDoListApp
     private void ReceiveReminders()
     {
         Console.Clear();
-        Console.WriteLine("=== Upcoming Deadlines ===");
+        Console.WriteLine("「 Upcoming Deadlines 」");
 
         var upcomingTasks = tasks.Where(t => !t.IsCompleted && t.Deadline <= DateTime.Now.AddDays(1));
         if (!upcomingTasks.Any())
@@ -173,7 +173,7 @@ class ToDoListApp
     private void MarkTaskComplete()
     {
         Console.Clear();
-        Console.WriteLine("=== Mark Task as Complete ===");
+        Console.WriteLine("「 Mark Task as Complete 」");
         ViewTasks();
 
         Console.Write("Enter Task ID to mark as complete: ");
@@ -187,7 +187,7 @@ class ToDoListApp
     private void SetTaskPriority()
     {
         Console.Clear();
-        Console.WriteLine("=== Set Task Priority ===");
+        Console.WriteLine("「 Change Task Priority 」");
         ViewTasks();
 
         Console.Write("Enter Task ID to set priority: ");
@@ -203,7 +203,7 @@ class ToDoListApp
     private void ViewTasks()
     {
         Console.Clear();
-        Console.WriteLine("=== View To-Do List ===");
+        Console.WriteLine("「 View To-Do List 」");
 
         if (!tasks.Any())
         {
