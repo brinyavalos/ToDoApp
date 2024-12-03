@@ -1,6 +1,6 @@
-#Project for 3112
+# Project for 3112
 
-###Project Proposal ~ To-Do List app
+### Project Proposal ~ To-Do List app
 
 Description ~ An application that allows users to create tasks set deadlines, receive reminders, check off tasks, and categorize tasks by priority
 
