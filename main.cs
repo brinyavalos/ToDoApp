@@ -8,7 +8,7 @@ class Task
     public string Title { get; set; }
     public string Description { get; set; }
     public DateTime Deadline { get; set; }
-    public string Priority { get; set; } // Low, Medium, High
+    public string Priority { get; set; } 
     public bool IsCompleted { get; set; }
 
     public override string ToString()
