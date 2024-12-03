@@ -5,7 +5,7 @@ Project Proposal ~ To-Do List app
 Description ~ An application that allows users to create tasks set deadlines, receive reminders, check off tasks, and categorize tasks by priority
 
 **Rationale**
-    The app helps users to keep track of tasks in order to stay organized and productive. It is useful for anyone that needs a simple way to manage tasks, such as students or busy professionals.
+    -The app helps users to keep track of tasks in order to stay organized and productive. It is useful for anyone that needs a simple way to manage tasks, such as students or busy professionals.
 **Description**
       This To-Do List app lets users add/edit tasks, set due dates, get reminders, check off completed tasks, and mark tasks by priority (High, Medium, Low). The app will be simple and easy to use.
 **Functional**
