@@ -30,7 +30,15 @@
   - Secure: User info should be protected.
 
 
-**Use Case Diagram**
+### Use Case Diagram
 
 
 ![Diagram pic](usecasediagram.jpg)
+
+**Description** 
+- Actors:
+-     User: The individual using the app, represented by the "Actor" figure on the left.
+- Includes Relationship:
+-     Set Due Date includes Receive Reminder: When the user gives a task a due date, reminders will automatically be scheduled.
+-     Excludes Relationship:
+        Receive Reminder excludes Mark Complete: Receiving a reminder does not automatically mark the task as complete. The user has to manually perform this action
