@@ -31,4 +31,4 @@
 
 
 **Use Case Diagram**
-![Diagram pic]([github/docs/blob/main/usecasediagram.jpg](https://github.com/brinyavalos/ToDoApp/blob/main/usecasediagram.jpg))
+![Diagram pic](usecasediagram.jpg)
