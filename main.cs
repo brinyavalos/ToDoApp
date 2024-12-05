@@ -36,7 +36,7 @@ class ToDoListApp
             Console.WriteLine("6. Change Task Priority");
             Console.WriteLine("7. View To-Do List");
             Console.WriteLine("8. Exit");
-            Console.Write("Choose an option: ");
+            Console.Write("\nChoose an option: ");
 
             string choice = Console.ReadLine();
 
@@ -112,6 +112,14 @@ class ToDoListApp
     {
         Console.Clear();
         Console.WriteLine("「 Change Due Date 」");
+
+        if (!tasks.Any())
+        {
+            Console.WriteLine("No tasks available to update the due date.\nPress Enter to return to the main menu.");
+            Console.ReadLine();
+            return;
+        }
+
         ViewTasks();
 
         Console.Write("Enter Task ID to set due date: ");
@@ -133,6 +141,14 @@ class ToDoListApp
     {
         Console.Clear();
         Console.WriteLine("「 Edit Task 」");
+
+        if (!tasks.Any())
+        {
+            Console.WriteLine("No tasks available to edit.\nPress Enter to return to the main menu.");
+            Console.ReadLine();
+            return;
+        }
+
         ViewTasks();
 
         Console.Write("Enter Task ID to edit: ");
@@ -174,6 +190,14 @@ class ToDoListApp
     {
         Console.Clear();
         Console.WriteLine("「 Mark Task as Complete 」");
+
+        if (!tasks.Any())
+        {
+            Console.WriteLine("No tasks available to mark as complete.\nPress Enter to return to the main menu.");
+            Console.ReadLine();
+            return;
+        }
+
         ViewTasks();
 
         Console.Write("Enter Task ID to mark as complete: ");
@@ -188,6 +212,14 @@ class ToDoListApp
     {
         Console.Clear();
         Console.WriteLine("「 Change Task Priority 」");
+
+        if (!tasks.Any())
+        {
+            Console.WriteLine("No tasks available to change priority.\nPress Enter to return to the main menu.");
+            Console.ReadLine();
+            return;
+        }
+
         ViewTasks();
 
         Console.Write("Enter Task ID to set priority: ");
