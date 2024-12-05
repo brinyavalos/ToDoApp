@@ -28,3 +28,7 @@
   - Works Everywhere: It should work on iOS, Android, and web browsers.
   - Reliable: It shouldn’t crash or lose user data.
   - Secure: User info should be protected.
+
+
+**Use Case Diagram**
+![Diagram pic]([github/docs/blob/main/usecasediagram.jpg](https://github.com/brinyavalos/ToDoApp/blob/main/usecasediagram.jpg))
